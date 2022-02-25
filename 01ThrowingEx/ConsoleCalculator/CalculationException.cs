@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleCalculator
 {
-    class CalculationException : Exception
+    public class CalculationException : Exception
     {
         private const string _defaultMessage = "Error Message, idk i don't want to re-type it XD";
 

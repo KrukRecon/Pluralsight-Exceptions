@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleCalculator
 {
-    class CalculationOperationNotSupportedException : CalculationException
+    public class CalculationOperationNotSupportedException : CalculationException
     {
         private const string _defaultMessage = "Specified operation was out of the range of valid values";
 
