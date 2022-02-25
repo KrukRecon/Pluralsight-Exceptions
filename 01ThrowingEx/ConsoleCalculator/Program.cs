@@ -7,6 +7,9 @@ namespace ConsoleCalculator
     {
         static void Main(string[] args)
         {
+            AppDomain currentAppDomain = AppDomain.CurrentDomain;
+            currentAppDomain.UnhandledException += new UnhandledExceptionEventHandler(HandleException);
+
             WriteLine("Enter first number");
             int number1 = int.Parse(ReadLine());
 
@@ -24,14 +27,35 @@ namespace ConsoleCalculator
                 int result = calculator.Calculate(number1, number2, operation);
                 DisplayResult(result);
             }
+            catch (ArgumentNullException ex) when (ex.ParamName == "operation")
+            {
+                Console.WriteLine("Operation was not provided.");
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine($"An argument was null. {ex}");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine($"Operation is not supported. {ex}");
+            }
             catch (Exception ex)
             {
-                Console.WriteLine($"Sorry, something went wrong. {ex.Message}");
+                Console.WriteLine($"Sorry, something went wrong. {ex}");
+            }
+            finally
+            {
+                Console.WriteLine("XD");
             }
 
 
             WriteLine("\nPress enter to exit.");
             ReadLine();
+        }
+
+        private static void HandleException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Console.WriteLine($"Sorry there was a problem and we need to close. Details: {e.ExceptionObject}");
         }
 
         private static void DisplayResult(int result) => WriteLine($"Result is: {result}");
