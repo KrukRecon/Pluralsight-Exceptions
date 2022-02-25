@@ -39,6 +39,15 @@ namespace ConsoleCalculator
             {
                 Console.WriteLine($"Operation is not supported. {ex}");
             }
+            catch (CalculationOperationNotSupportedException ex)
+            {
+                Console.WriteLine($"CalculationOperationNotSupportedException caught: {ex.Operation}");
+                Console.WriteLine(ex);
+            }
+            catch (CalculationException ex)
+            {
+                Console.WriteLine($"CalculationException caught: {ex}");
+            }
             catch (Exception ex)
             {
                 Console.WriteLine($"Sorry, something went wrong. {ex}");
